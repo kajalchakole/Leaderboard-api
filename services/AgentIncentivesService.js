@@ -1,5 +1,5 @@
 const AgentIncentives = require('../models/AgentIncentives');
-const AgentService = require('./agentService');
+const AgentService = require('./AgentService');
 
 module.exports = class AgentIncentivesService {
     static async getAgentIncentives(id) {
