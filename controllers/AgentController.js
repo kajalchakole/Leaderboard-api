@@ -1,4 +1,4 @@
-const AgentService = require('../services/agentService');
+const AgentService = require('../services/AgentService');
 module.exports = class AgentController {
     static async getAllAgents(req, res) {
         try {
