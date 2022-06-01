@@ -19,8 +19,8 @@ module.exports = class AgentIncentivesService {
         try {
             const record = await this.getAgentIncentives(empId);
             if (record.length > 0) {
-                let totalncentivesEarned = incentives + record[0].totalncentivesEarned;
-                const result = await AgentIncentives.findOneAndUpdate({ id: record[0].id },
+                let totalncentivesEarned = incentives + (record[0].totalncentivesEarned === undefined ? 0 : record[0].totalncentivesEarned);
+                const result = await AgentIncentives.findOneAndUpdate({ id: record[0].id, empId },
                     { totalncentivesEarned }, { session });
                 return result;
             } else {
