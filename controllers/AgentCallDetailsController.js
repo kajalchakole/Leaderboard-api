@@ -14,7 +14,7 @@ module.exports = class AgentCallDetailsController {
     }
     static async addCallDetails(req, res) {
         try {
-            const result = await AgentCallDetailsService.addCallDetails(req.params.id, req.body);
+            await AgentCallDetailsService.addCallDetails(req.params.id, req.body);
             res.status(200).send(`Call details added for agent ${req.params.id}`)
         } catch (error) {
             res.status(500).send(error.message);
@@ -23,7 +23,7 @@ module.exports = class AgentCallDetailsController {
 
     static async updateCallDetails(req, res) {
         try {
-            const result = await AgentCallDetailsService.updateCallDetails(req.params.id, req.body);
+            await AgentCallDetailsService.updateCallDetails(req.params.id, req.body);
             res.status(200).send(`Call details added for agent ${req.params.id}`)
         } catch (error) {
             res.status(500).send(error.message);
