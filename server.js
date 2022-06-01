@@ -3,7 +3,7 @@ const Joi = require('joi');
 const express = require('express');
 const app = express();
 var { mongoose } = require('./db/mongoose');
-const AgentRoutes = require('./routes/agentRoutes');
+const AgentRoutes = require('./routes/AgentRoutes');
 const AgentIncentivesRoutes = require('./routes/AgentIncentivesRoutes');
 const AgentCallDetailsRouter = require('./routes/AgentCallDetailsRoutes');
 
