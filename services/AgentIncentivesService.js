@@ -7,7 +7,8 @@ const mongoose = require('mongoose');
 module.exports = class AgentIncentivesService {
     static async getAgentIncentives(empId) {
         try {
-            return await AgentIncentives.find({ empId });
+            //TODO get incentives from AgentCallDetails Table
+            return await Agent.find({ empId });
         } catch (error) {
             throw new Error(error);
         }
