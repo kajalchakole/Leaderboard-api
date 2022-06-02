@@ -35,29 +35,25 @@ module.exports = class AgentIncentivesService {
 
     static async calculateAllIncentives() {
         try {
-            const records = await Agent.aggregate([{
-                $lookup: {
-                    from: 'agentcalldetails',
-                    localField: 'empId',
-                    foreignField: 'empId',
-                    as: 'agent_calls'
+            const records = await AgentCallDetails.aggregate([
+                {
+                    $group: {
+                        "_id": "$empId",
+                        totalIncentivesEarned: { $sum: "$incentives" }
+                    }
+                },
+                {
+                    $sort:
+                    {
+                        totalIncentivesEarned: -1
+                    }
                 }
-            },{   $unwind:"$agent_calls" },
-            {
-                $project: {
-                    _id: 1,
-                    empId: 1,
-                    incentives: "$agent_calls.incentives",
-                    totalIncentivesEarned: 1
-                }
-            }
             ]);
-            await Agent.updateMany({}, {totalIncentivesEarned: 0});
+            
 
             for (let index = 0; index < records.length; index++) {
                 const callDetail = records[index];
-                let totalIncentivesEarned = callDetail.incentives + (callDetail.totalIncentivesEarned === undefined ? 0 : callDetail.totalIncentivesEarned);
-                const result = await Agent.findOneAndUpdate({ agentId: callDetail.id, empId: callDetail.empId}, {totalIncentivesEarned });
+                const result = await Agent.findOneAndUpdate({ empId: callDetail._id }, {totalIncentivesEarned: callDetail.totalIncentivesEarned });
             }
             return records;
 
