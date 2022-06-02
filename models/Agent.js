@@ -42,6 +42,10 @@ const Agent = new mongoose.Schema({
     },
     active: {
         type: Boolean
+    },
+    totalIncentivesEarned: {
+        type: Number,
+        default: 0
     }
 });
 

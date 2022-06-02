@@ -12,7 +12,7 @@ var AgentIncentives = new mongoose.Schema({
         type: Number,
         required: true
     },
-    totalncentivesEarned: {
+    totalIncentivesEarned: {
         type: Number
     }
 });

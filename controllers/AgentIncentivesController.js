@@ -21,4 +21,13 @@ module.exports = class AgentIncentivesController {
             res.status(500).send(error.message);
         }
     }
+
+    static async calculateAllIncentives(req, res) {
+        try {
+            const result = await AgentIncentivesService.calculateAllIncentives();
+            res.send(result);
+        } catch (error) {
+            res.status(500).send(error.message);
+        }
+    }
 }
